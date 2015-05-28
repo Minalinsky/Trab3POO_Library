@@ -11,6 +11,7 @@ import java.util.List;
 public class Library 
 {
 	private ArrayList<User> usersList = new ArrayList<User>();
+	private ArrayList<Book> booksList = new ArrayList<Book>();
 	
 	public void registerUser(String path, String name, String rg, String type) throws IOException
 	{ 
@@ -43,6 +44,28 @@ public class Library
 		}
 		//Ao chegar nesse ponto, temos um userList com todos os usuarios registrados
 		//Usar readUsers() para obter a lista de usuarios do arquivo, e usar essa lista para imprimir 
+		//		os nomes no "See All the Users" da interface
+		
+	buffRead.close();
+	}
+	
+	public void readBooks(String path) throws IOException //Le todos os livros e joga na "List<Book> bookList"
+	{ 			
+		String[] str;
+		Book b = new Book();
+		BufferedReader buffRead = new BufferedReader(new FileReader(path));
+		String line = buffRead.readLine(); 
+		while(line != null)
+		{
+				str = line.split(","); //Separando cada campo pelo delimitador
+				b.setTitle(str[0]); //Colocando cada campo em um Book
+				b.setAuthor(str[1]);
+				b.setType(str[2]);
+				booksList.add(b); //Adicionando book na lista
+				line = buffRead.readLine(); //Lendo proximo livro
+		}
+		//Ao chegar nesse ponto, temos um booksList com todos os livros registrados
+		//Usar readBooks() para obter a lista de usuarios do arquivo, e usar essa lista para imprimir 
 		//		os nomes no "See All the Users" da interface
 		
 	buffRead.close();
