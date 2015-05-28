@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<Pane fx:id="Label" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="558.0" prefWidth="763.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="library.MenuController">
+   <children>
+      <Label layoutX="65.0" layoutY="14.0" prefHeight="56.0" prefWidth="143.0" text="Register Users" textAlignment="CENTER">
+         <font>
+            <Font size="22.0" />
+         </font>
+      </Label>
+      <Label layoutX="316.0" layoutY="14.0" prefHeight="56.0" prefWidth="149.0" text="Register Books" textAlignment="CENTER">
+         <font>
+            <Font size="22.0" />
+         </font>
+      </Label>
+      <Label layoutX="565.0" layoutY="14.0" prefHeight="56.0" prefWidth="168.0" text="Register / Return" textAlignment="CENTER">
+         <font>
+            <Font size="22.0" />
+         </font>
+      </Label>
+      <Separator layoutX="251.0" layoutY="35.0" orientation="VERTICAL" prefHeight="411.0" prefWidth="12.0" />
+      <Separator layoutX="509.0" layoutY="35.0" orientation="VERTICAL" prefHeight="411.0" prefWidth="12.0" />
+      <Label layoutX="33.0" layoutY="105.0" prefHeight="21.0" prefWidth="55.0" text="Name:">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </Label>
+      <Label layoutX="34.0" layoutY="163.0" text="RG:">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </Label>
+      <TextField fx:id="TextNameUser" layoutX="34.0" layoutY="126.0" prefHeight="25.0" prefWidth="205.0" />
+      <TextField fx:id="TextRgUser" layoutX="34.0" layoutY="180.0" />
+      <Label layoutX="33.0" layoutY="219.0" prefHeight="19.0" prefWidth="41.0" text="Type:">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </Label>
+      <Button fx:id="BtRegisterUser" layoutX="33.0" layoutY="287.0" mnemonicParsing="false" onAction="#onClickRegisterUser" text="Register">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </Button>
+      <Button fx:id="BtPrintUsers" layoutX="81.0" layoutY="403.0" mnemonicParsing="false" onAction="#onClickShowUsers" text="See all the Users">
+         <font>
+            <Font size="13.0" />
+         </font></Button>
+      <Label layoutX="283.0" layoutY="105.0" prefHeight="21.0" prefWidth="55.0" text="Title:">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </Label>
+      <TextField fx:id="TextTitleBook" layoutX="279.0" layoutY="126.0" prefHeight="25.0" prefWidth="205.0" />
+      <Label layoutX="283.0" layoutY="162.0" prefHeight="21.0" prefWidth="55.0" text="Author:">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </Label>
+      <TextField fx:id="TextAuthorBook" layoutX="279.0" layoutY="180.0" prefHeight="25.0" prefWidth="205.0" />
+      <Label layoutX="279.0" layoutY="219.0" prefHeight="19.0" prefWidth="41.0" text="Type:">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </Label>
+      <Button fx:id="BtRegisterBook" layoutX="284.0" layoutY="287.0" mnemonicParsing="false" onAction="#onClickRegisterBook" text="Register">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </Button>
+      <Button fx:id="BtPrintBooks" layoutX="333.0" layoutY="403.0" mnemonicParsing="false" text="See all the Books">
+         <font>
+            <Font size="13.0" />
+         </font></Button>
+      <Label layoutX="538.0" layoutY="105.0" prefHeight="21.0" prefWidth="55.0" text="Name:">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </Label>
+      <TextField fx:id="TextNameLoan" layoutX="538.0" layoutY="126.0" prefHeight="25.0" prefWidth="205.0" />
+      <Label layoutX="538.0" layoutY="162.0" prefHeight="21.0" prefWidth="55.0" text="Title:">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </Label>
+      <TextField fx:id="TextTitleLoan" layoutX="538.0" layoutY="180.0" prefHeight="25.0" prefWidth="205.0" />
+      <Label layoutX="538.0" layoutY="218.0" prefHeight="21.0" prefWidth="132.0" text="Date of the Loan:">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </Label>
+      <TextField fx:id="TextDateLoan" layoutX="538.0" layoutY="236.0" />
+      <Label layoutX="622.0" layoutY="49.0" prefHeight="56.0" prefWidth="55.0" text="Loan" textAlignment="CENTER">
+         <font>
+            <Font size="22.0" />
+         </font>
+      </Label>
+      <Label layoutX="538.0" layoutY="278.0" prefHeight="19.0" prefWidth="41.0" text="Type:">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </Label>
+      <Button fx:id="BtRegisterLoan" layoutX="538.0" layoutY="337.0" mnemonicParsing="false" onAction="#onClickRegisterLoan" text="Register">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </Button>
+      <Button fx:id="BtPrintLoans" layoutX="584.0" layoutY="403.0" mnemonicParsing="false" text="See all the Loans">
+         <font>
+            <Font size="13.0" />
+         </font></Button>
+      <Label layoutX="495.0" layoutY="497.0" prefHeight="32.0" prefWidth="73.0" text="DATA">
+         <font>
+            <Font size="22.0" />
+         </font>
+      </Label>
+      <Button fx:id="BtAdvDay" layoutX="582.0" layoutY="498.0" mnemonicParsing="false" text="Advanced the day">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Button>
+      <Separator layoutX="25.0" layoutY="472.0" prefHeight="8.0" prefWidth="714.0" />
+      <TextField fx:id="TextTypeUser" layoutX="34.0" layoutY="236.0" />
+      <TextField fx:id="TextTypeBook" layoutX="283.0" layoutY="236.0" />
+      <TextField fx:id="TextTypeLoan" layoutX="538.0" layoutY="297.0" />
+      <Label fx:id="ErrorUser" layoutX="40.0" layoutY="337.0" prefHeight="17.0" prefWidth="168.0" text="Invalid Type!" visible="false" />
+      <Label fx:id="ErrorBooks" layoutX="279.0" layoutY="343.0" prefHeight="17.0" prefWidth="168.0" text="Label" visible="false" />
+      <Label fx:id="ErrorLoan" layoutX="616.0" layoutY="343.0" prefHeight="17.0" prefWidth="122.0" text="Label" visible="false" />
+   </children>
+</Pane>

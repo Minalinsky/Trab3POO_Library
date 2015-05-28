@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<Pane fx:id="DatePane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="311.0" prefWidth="430.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="library.DateController">
+   <children>
+      <Label alignment="CENTER" layoutX="70.0" layoutY="27.0" prefHeight="70.0" prefWidth="311.0" text="Library System" textAlignment="CENTER">
+         <font>
+            <Font size="48.0" />
+         </font>
+      </Label>
+      <Separator layoutX="39.0" layoutY="114.0" prefHeight="3.0" prefWidth="359.0" />
+      <Label layoutX="106.0" layoutY="132.0" prefHeight="36.0" prefWidth="218.0" text="Type what day it is:">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Label>
+      <TextField fx:id="DateText" layoutX="144.0" layoutY="189.0" />
+      <Button fx:id="DateButton" layoutX="195.0" layoutY="233.0" mnemonicParsing="false" onAction="#LoadDate" prefHeight="25.0" prefWidth="48.0" text="OK" />
+      <Label fx:id="MsgError" layoutX="172.0" layoutY="273.0" text="Type a valid date!" visible="false" />
+   </children>
+</Pane>
