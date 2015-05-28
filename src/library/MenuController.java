@@ -100,15 +100,15 @@ public class MenuController implements Initializable
     }
 
     @FXML
-    void onClickRegisterLoan(ActionEvent event) 
+    void onClickRegisterLoan(ActionEvent event) throws Exception
     {
-
+    	
     }
     
     @FXML
-    void onClickShowUsers(ActionEvent event) 
+    void onClickShowUsers(ActionEvent event) throws Exception
     {
-    	
+    	lb.readUsers("Users.csv");
     }
     
 }

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="library.SeeAllUsersController">
+   <children>
+      <HBox fx:id="SeeAllUsersHBox1" prefHeight="400.0" prefWidth="198.0">
+         <children>
+            <Text fx:id="TextHBox1" strokeType="OUTSIDE" strokeWidth="0.0" text="Name" textAlignment="CENTER" wrappingWidth="204.6708984375">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Text>
+         </children>
+      </HBox>
+      <HBox fx:id="SeeAllUsersHBox2" prefHeight="100.0" prefWidth="200.0">
+         <children>
+            <Text fx:id="TextHBox2" strokeType="OUTSIDE" strokeWidth="0.0" text="R.G." textAlignment="CENTER" wrappingWidth="198.3037109375">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Text>
+         </children>
+      </HBox>
+      <HBox fx:id="SeeAllUsersHBox3" prefHeight="100.0" prefWidth="200.0">
+         <children>
+            <Text fx:id="TextHBox3" strokeType="OUTSIDE" strokeWidth="0.0" text="Type" textAlignment="CENTER" wrappingWidth="196.6708984375">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Text>
+         </children>
+      </HBox>
+   </children>
+</HBox>
