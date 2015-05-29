@@ -6,7 +6,6 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-//import java.util.List;
 
 public class Library 
 {	
@@ -28,47 +27,39 @@ public class Library
 	{ 		
 		ArrayList<User> list = new ArrayList<User>();
 		String[] str;
-		User u = new User();
 		BufferedReader buffRead = new BufferedReader(new FileReader(path));
 		String line = buffRead.readLine(); 
 		while(line != null)
 		{
-				str = line.split(","); //Separando cada campo pelo delimitador
-				u.setName(str[0]); //Colocando cada campo em um User
-				u.setRg(str[1]);
-				u.setType(str[2]);
-				list.add(u); //Adicionando user na lista
-				line = buffRead.readLine(); //Lendo proximo registro
-		}
-		
+			User u = new User();
+			str = line.split(","); //Separando cada campo pelo delimitador
+			u.setName(str[0]); //Colocando cada campo em um User
+			u.setRg(str[1]);
+			u.setType(str[2]);
+			list.add(u); //Adicionando user na lista
+			line = buffRead.readLine(); //Lendo proximo registro
+		}		
 	buffRead.close();
 	return list;
 	}
 	
-		//Ao chegar nesse ponto, temos um userList com todos os usuarios registrados
-		//Usar readUsers() para obter a lista de usuarios do arquivo, e usar essa lista para imprimir 
-		//		os nomes no "See All the Users" da interface
-		
-	
-	/*public void readBooks(String path) throws IOException //Le todos os livros e joga na "List<Book> bookList"
-	{ 			
+public ArrayList<Book> readBooks(String path) throws IOException //Le todos os livros e joga na "List<Book> bookList"
+	{ 	
+		ArrayList<Book> list = new ArrayList<Book>();
 		String[] str;
-		Book b = new Book();
 		BufferedReader buffRead = new BufferedReader(new FileReader(path));
 		String line = buffRead.readLine(); 
 		while(line != null)
 		{
-				str = line.split(","); //Separando cada campo pelo delimitador
-				b.setTitle(str[0]); //Colocando cada campo em um Book
-				b.setAuthor(str[1]);
-				b.setType(str[2]);
-				booksList.add(b); //Adicionando book na lista
-				line = buffRead.readLine(); //Lendo proximo livro
+			Book b = new Book();
+			str = line.split(","); //Separando cada campo pelo delimitador
+			b.setTitle(str[0]); //Colocando cada campo em um Book
+			b.setAuthor(str[1]);
+			b.setType(str[2]);
+			list.add(b); //Adicionando book na lista
+			line = buffRead.readLine(); //Lendo proximo livro
 		}
-		//Ao chegar nesse ponto, temos um booksList com todos os livros registrados
-		//Usar readBooks() para obter a lista de usuarios do arquivo, e usar essa lista para imprimir 
-		//		os nomes no "See All the Users" da interface
-		
 	buffRead.close();
-	}*/
+	return list;
+	}
 }
