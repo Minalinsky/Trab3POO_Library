@@ -73,7 +73,7 @@
             <Font size="13.0" />
          </font>
       </Button>
-      <Button fx:id="BtPrintBooks" layoutX="333.0" layoutY="403.0" mnemonicParsing="false" text="See all the Books">
+      <Button fx:id="BtPrintBooks" layoutX="333.0" layoutY="403.0" mnemonicParsing="false" onAction="#onClickShowBooks" text="See all the Books">
          <font>
             <Font size="13.0" />
          </font></Button>
@@ -128,7 +128,7 @@
       <TextField fx:id="TextTypeUser" layoutX="34.0" layoutY="236.0" />
       <TextField fx:id="TextTypeBook" layoutX="283.0" layoutY="236.0" />
       <TextField fx:id="TextTypeLoan" layoutX="538.0" layoutY="297.0" />
-      <Label fx:id="ErrorUser" layoutX="40.0" layoutY="337.0" prefHeight="17.0" prefWidth="168.0" text="Invalid Type!" visible="false" />
+      <Label fx:id="ErrorUser" layoutX="40.0" layoutY="337.0" prefHeight="17.0" prefWidth="168.0" text="Label" visible="false" />
       <Label fx:id="ErrorBooks" layoutX="279.0" layoutY="343.0" prefHeight="17.0" prefWidth="168.0" text="Label" visible="false" />
       <Label fx:id="ErrorLoan" layoutX="616.0" layoutY="343.0" prefHeight="17.0" prefWidth="122.0" text="Label" visible="false" />
    </children>

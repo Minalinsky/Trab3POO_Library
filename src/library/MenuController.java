@@ -5,15 +5,19 @@ import java.util.ResourceBundle;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
 public class MenuController implements Initializable
 {
 	//Stage primaryStage = (Stage) ((Button)event.getSource()).getScene().getWindow();
-	Library lb = new Library();
+	static Library lb = new Library();
 
     @FXML
     private Button BtPrintBooks;
@@ -77,8 +81,7 @@ public class MenuController implements Initializable
     
     @Override    
     public void initialize(URL url, ResourceBundle bundle) 
-    {            
-    	
+    {            	
     } 
     
     @FXML
@@ -87,10 +90,14 @@ public class MenuController implements Initializable
     	if(TextTypeUser.getText().equals("student") || TextTypeUser.getText().equals("teacher") || TextTypeUser.getText().equals("comunity"))
 		{
     		lb.registerUser("Users.csv", TextNameUser.getText(), TextRgUser.getText(), TextTypeUser.getText());
-    		ErrorUser.setVisible(false);
+    		ErrorUser.setText("Registro inserido com sucesso!");
+    		ErrorUser.setVisible(true);
 		}
     	else
-    	 ErrorUser.setVisible(true);
+    	{	
+    		ErrorUser.setText("Tipo inválido!");
+    		ErrorUser.setVisible(true);
+    	}
 	}
     
     @FXML
@@ -106,9 +113,22 @@ public class MenuController implements Initializable
     }
     
     @FXML
-    void onClickShowUsers(ActionEvent event) 
+    void onClickShowUsers(ActionEvent event) throws Exception
     {
-    	
+    	Stage primaryStage = new Stage();
+    	Parent root = FXMLLoader.load(getClass().getResource("UsersList.fxml"));
+		Scene scene = new Scene(root);
+		primaryStage.setScene(scene);
+		primaryStage.show();
     }
     
+    @FXML
+    void onClickShowBooks(ActionEvent event) throws Exception
+    {
+    	Stage primaryStage = new Stage();
+    	Parent root = FXMLLoader.load(getClass().getResource("BooksList.fxml"));
+		Scene scene = new Scene(root);
+		primaryStage.setScene(scene);
+		primaryStage.show();
+    }    
 }
