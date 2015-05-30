@@ -33,7 +33,7 @@ public class UsersListController extends MenuController implements Initializable
 	{    
 		try
 		{
-			list = lb.readUsers("Users.csv");
+			list = lb.readUsers();
 			
 			columnName.setCellValueFactory(new PropertyValueFactory<>("name"));
 			columnRG.setCellValueFactory(new PropertyValueFactory<>("rg"));
