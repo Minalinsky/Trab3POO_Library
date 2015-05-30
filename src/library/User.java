@@ -5,7 +5,12 @@ public class User
 	private String name;
 	private String rg;
 	private String type;
+	private String banned;
 	
+	public String getBanned()
+	{
+		return banned;
+	}
 	public String getName()
 	{
 		return name;
@@ -34,5 +39,10 @@ public class User
 	public void setType(String t)
 	{
 		type = t;
+	}
+	
+	public void setBanned(String b)
+	{
+		banned = b;
 	}
 }

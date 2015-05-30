@@ -1,7 +1,11 @@
 package library;
 
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 import java.util.ResourceBundle;
+import java.util.stream.Collectors;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -12,6 +16,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 public class MenuController implements Initializable
@@ -19,6 +24,9 @@ public class MenuController implements Initializable
 	//Stage primaryStage = (Stage) ((Button)event.getSource()).getScene().getWindow();
 	static Library lb = new Library();
 
+    @FXML
+    private Text LblDate;
+	
     @FXML
     private Button BtPrintBooks;
 
@@ -30,9 +38,6 @@ public class MenuController implements Initializable
 
     @FXML
     private TextField TextTitleLoan;
-
-    @FXML
-    private TextField TextDateLoan;
 
     @FXML
     private Button BtRegisterUser;
@@ -57,9 +62,6 @@ public class MenuController implements Initializable
 
     @FXML
     private Button BtRegisterBook;
-
-    @FXML
-    private Button BtAdvDay;
     
     @FXML
     private TextField TextTypeUser;
@@ -81,7 +83,9 @@ public class MenuController implements Initializable
     
     @Override    
     public void initialize(URL url, ResourceBundle bundle) 
-    {            	
+    {            
+    	LblDate.setText(lb.formatter.format(lb.date));
+    	
     } 
     
     @FXML
@@ -106,10 +110,51 @@ public class MenuController implements Initializable
     	lb.registerBook("Books.csv", TextTitleBook.getText(), TextAuthorBook.getText(), TextTypeBook.getText());
     }
 
-    @FXML
-    void onClickRegisterLoan(ActionEvent event) 
+    @SuppressWarnings("deprecation")
+	@FXML
+    void onClickRegisterLoan(ActionEvent event) throws Exception
     {
-
+    	ArrayList<User> usersList = lb.readUsers("Users.csv");
+    	ArrayList<Loan> loansList = lb.readLoans("Loans.csv");
+    	
+    	Date aux = new Date(lb.date.getYear(), lb.date.getMonth(), lb.date.getDate());
+    	
+    	String rg = TextNameLoan.getText();
+    	List<User> filteredList = usersList.stream().filter(u->u.getRg().equals(rg))
+    			.collect(Collectors.toList());
+    	User filteredUser = filteredList.get(0);
+    	
+    	long numberLoans = loansList.stream().filter(l->l.getRg().equals(rg))
+    			.filter(l->l.getOk().equals("false")).collect(Collectors.counting());
+    	
+    	if(filteredUser.getBanned().equals("false"))
+    	{
+    		if(filteredUser.getType().equals("teacher"))
+    		{
+    			if(numberLoans < 6)
+    			{
+    				aux.setDate(lb.date.getDate() + 60);
+    				lb.registerLoan("Loans.csv", TextNameLoan.getText(), TextTitleLoan.getText(), lb.formatter.format(aux));
+    			}
+    		}
+    		else if(filteredUser.getType().equals("student"))
+    		{
+    			if(numberLoans < 4)
+    			{
+    				aux.setDate(lb.date.getDate() + 15);
+    				lb.registerLoan("Loans.csv", TextNameLoan.getText(), TextTitleLoan.getText(), lb.formatter.format(aux));
+    			}
+    		}
+    		else if(filteredUser.getType().equals("comunity"))
+    		{
+    			if(numberLoans < 2)
+    			{
+    				aux.setDate(lb.date.getDate() + 15);
+    				lb.registerLoan("Loans.csv", TextNameLoan.getText(), TextTitleLoan.getText(), lb.formatter.format(aux));
+    			}
+    		}
+    	}
+    
     }
     
     @FXML

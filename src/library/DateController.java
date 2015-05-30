@@ -15,8 +15,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
-public class DateController implements Initializable
-{	
+public class DateController extends MenuController implements Initializable
+{		
 	@FXML
 	private Button DateButton;
 
@@ -45,7 +45,8 @@ public class DateController implements Initializable
 	   	}
    		else
    		{	
-	   		//String date = DateText.getText();
+   			lb.date = lb.formatter.parse(DateText.getText());
+	   		
 	   		DatePane.setVisible(false);
 	   		Stage primaryStage = new Stage();	
 	   		Parent root = FXMLLoader.load(getClass().getResource("Menu.fxml"));

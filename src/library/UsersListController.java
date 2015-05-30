@@ -44,7 +44,7 @@ public class UsersListController extends MenuController implements Initializable
 		}
 		catch(IOException e)
 		{
-			System.out.println("error when showing users ");
+			System.out.println("Error when showing users! ");
 		}
 	}
 }

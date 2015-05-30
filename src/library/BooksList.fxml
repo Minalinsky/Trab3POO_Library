@@ -15,9 +15,9 @@
       </Label>
       <TableView fx:id="ListBooks" layoutX="28.0" layoutY="95.0" prefHeight="246.0" prefWidth="420.0">
          <columns>
-            <TableColumn fx:id="columnAuthor" prefWidth="160.0" text="Autor" />
-            <TableColumn fx:id="columnTitle" prefWidth="133.0" text="Título" />
-            <TableColumn fx:id="columnType" prefWidth="126.0" text="Tipo" />
+            <TableColumn fx:id="columnTitle" prefWidth="133.0" text="Title" />
+            <TableColumn fx:id="columnAuthor" prefWidth="160.0" text="Author" />
+            <TableColumn fx:id="columnType" prefWidth="126.0" text="Type" />
          </columns>
       </TableView>
    </children>

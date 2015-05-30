@@ -77,7 +77,7 @@
          <font>
             <Font size="13.0" />
          </font></Button>
-      <Label layoutX="538.0" layoutY="105.0" prefHeight="21.0" prefWidth="55.0" text="Name:">
+      <Label layoutX="538.0" layoutY="105.0" prefHeight="21.0" prefWidth="55.0" text="RG:">
          <font>
             <Font size="13.0" />
          </font>
@@ -89,23 +89,17 @@
          </font>
       </Label>
       <TextField fx:id="TextTitleLoan" layoutX="538.0" layoutY="180.0" prefHeight="25.0" prefWidth="205.0" />
-      <Label layoutX="538.0" layoutY="218.0" prefHeight="21.0" prefWidth="132.0" text="Date of the Loan:">
-         <font>
-            <Font size="13.0" />
-         </font>
-      </Label>
-      <TextField fx:id="TextDateLoan" layoutX="538.0" layoutY="236.0" />
       <Label layoutX="622.0" layoutY="49.0" prefHeight="56.0" prefWidth="55.0" text="Loan" textAlignment="CENTER">
          <font>
             <Font size="22.0" />
          </font>
       </Label>
-      <Label layoutX="538.0" layoutY="278.0" prefHeight="19.0" prefWidth="41.0" text="Type:">
+      <Label layoutX="545.0" layoutY="219.0" prefHeight="19.0" prefWidth="41.0" text="Type:">
          <font>
             <Font size="13.0" />
          </font>
       </Label>
-      <Button fx:id="BtRegisterLoan" layoutX="538.0" layoutY="337.0" mnemonicParsing="false" onAction="#onClickRegisterLoan" text="Register">
+      <Button fx:id="BtRegisterLoan" layoutX="542.0" layoutY="287.0" mnemonicParsing="false" onAction="#onClickRegisterLoan" text="Register">
          <font>
             <Font size="13.0" />
          </font>
@@ -114,22 +108,16 @@
          <font>
             <Font size="13.0" />
          </font></Button>
-      <Label layoutX="495.0" layoutY="497.0" prefHeight="32.0" prefWidth="73.0" text="DATA">
-         <font>
-            <Font size="22.0" />
-         </font>
-      </Label>
-      <Button fx:id="BtAdvDay" layoutX="582.0" layoutY="498.0" mnemonicParsing="false" text="Advanced the day">
-         <font>
-            <Font size="14.0" />
-         </font>
-      </Button>
       <Separator layoutX="25.0" layoutY="472.0" prefHeight="8.0" prefWidth="714.0" />
       <TextField fx:id="TextTypeUser" layoutX="34.0" layoutY="236.0" />
       <TextField fx:id="TextTypeBook" layoutX="283.0" layoutY="236.0" />
-      <TextField fx:id="TextTypeLoan" layoutX="538.0" layoutY="297.0" />
+      <TextField fx:id="TextTypeLoan" layoutX="542.0" layoutY="236.0" />
       <Label fx:id="ErrorUser" layoutX="40.0" layoutY="337.0" prefHeight="17.0" prefWidth="168.0" text="Label" visible="false" />
       <Label fx:id="ErrorBooks" layoutX="279.0" layoutY="343.0" prefHeight="17.0" prefWidth="168.0" text="Label" visible="false" />
       <Label fx:id="ErrorLoan" layoutX="616.0" layoutY="343.0" prefHeight="17.0" prefWidth="122.0" text="Label" visible="false" />
+      <Text fx:id="LblDate" layoutX="521.0" layoutY="518.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="228.322265625">
+         <font>
+            <Font size="35.0" />
+         </font></Text>
    </children>
 </Pane>
