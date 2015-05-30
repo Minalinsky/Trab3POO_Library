@@ -1,10 +1,8 @@
 package library;
 
-import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileReader;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Date;
@@ -87,10 +85,14 @@ public class MenuController implements Initializable
     private Label ErrorLoan;
     
     @Override    
-    public void initialize(URL url, ResourceBundle bundle) 
+    public void initialize(URL url, ResourceBundle bundle)
     {            
-    	LblDate.setText(lb.formatter.format(lb.date));
-    	
+    	LblDate.setText(lb.formatter.format(lb.date)); //Colocando Data Atual digitada na primeira tela no canto direito da segunda tela
+    	//Ao abrir MenuController, remove de Ban.csv todos os usuarios que nao estao mais banidos (pela data atual)
+    	try{
+    		lb.unban();
+    	}
+    	catch(Exception e) {}
     } 
     
     @FXML
@@ -111,7 +113,8 @@ public class MenuController implements Initializable
     
     @FXML
     void onClickRegisterBook(ActionEvent event) throws Exception
-    {
+    {	
+    	//Tratar - nao aceitar outros tipos de livro
     	lb.registerBook(TextTitleBook.getText(), TextAuthorBook.getText(), TextTypeBook.getText());
     }
 
@@ -121,10 +124,10 @@ public class MenuController implements Initializable
     {
     	if(TextTypeLoan.getText().equals("Loan") || TextTypeLoan.getText().equals("loan")) //Se o tipo for emprestimo
     	{
-    		//Ao abrir MenuController, remover de ban.csv todos os usuarios que nao estao mais banidos (pela data atual)
-    		//Falta verificar se o livro existe na biblioteca
-    		//Falta tratar quando digitar coisas invalidas nos campos
-    		//Tratar um emprestimo por pessoa para cada titulo de livro
+    		// Tratar - verificar se o livro existe na biblioteca
+    		// Tratar - tratar quando digitar coisas invalidas nos campos
+    		// Tratar um emprestimo por pessoa para cada titulo de livro
+    		// Tratar - imprimir "Numero Maximo de Emprestimos permitidos!!"
 	    	lb.registerLoan(TextNameLoan.getText(), TextTitleLoan.getText());
     	}
     	else if(TextTypeLoan.getText().equals("Devolution") || TextTypeLoan.getText().equals("devolution"))
@@ -136,7 +139,7 @@ public class MenuController implements Initializable
         																				//com o livro de titulo passado
     		if(filteredLoansList.isEmpty())
     		{
-    			//Tratar
+    			//Tratar quando nao ha livros para serem devolvidos por "RG"
     		}
     		else 
     		{
@@ -165,10 +168,11 @@ public class MenuController implements Initializable
     				Date aux = new Date(lb.date.getYear(), lb.date.getMonth(), lb.date.getDate());
     				aux.setDate(aux.getDate() + counter);
     				//Escrevendo ban em Ban.csv
-    				BufferedWriter bw = new BufferedWriter(new FileWriter("Bans.csv"));
+    				BufferedWriter bw = new BufferedWriter(new FileWriter("Bans.csv", true));
     				bw.append(TextNameLoan.getText() + "," + lb.formatter.format(aux) + "\n"); //Escreve o RG e a data até quando esta banido em Ban.csv
     				bw.close();
     				lb.removeLoan(TextNameLoan.getText(), TextTitleLoan.getText());
+    				//Tratar - Mostrar "usuario foi banido por COUNTER dias!"
     			}
     		}
     	}

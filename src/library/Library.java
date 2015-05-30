@@ -162,7 +162,7 @@ public class Library
     	}
     	else
     	{
-    		//Tratar
+    		//Tratar quando o usuario está banido
     	}
 	}
 	
@@ -185,5 +185,31 @@ public class Library
 			File newFile = new File("tmp_Loans.csv");
 			oldFile.delete();
 			newFile.renameTo(oldFile);
+	}
+	
+	public void unban() throws Exception //Verifica quais usuarios estao desbanidos na data atual e remove de Bans.csv
+	{
+		BufferedReader br = new BufferedReader(new FileReader("Bans.csv"));
+		BufferedWriter bw = new BufferedWriter(new FileWriter("tmp_Bans.csv"));
+		String line;
+		String[] splitLine;
+		//ArrayList<Ban> bansList = this.readBans();
+		//Date today = this.date;
+		
+		while((line = br.readLine()) != null)
+		{
+			splitLine = line.split(",");
+			Date d = this.formatter.parse(splitLine[1]);
+			if(!(this.date.equals(d) || this.date.after(d)))
+			{
+				bw.append(line + "\n");
+			}
+		}
+		br.close();
+		bw.close();
+		File oldFile = new File("Bans.csv");
+		File newFile = new File("tmp_Bans.csv");
+		oldFile.delete();
+		newFile.renameTo(oldFile);
 	}
 }

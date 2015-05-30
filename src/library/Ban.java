@@ -9,7 +9,7 @@ public class Ban
 		return rg;
 	}
 	
-	public String getDate() {
+	public String getBannedDate() {
 		return bannedDate;
 	}
 	
