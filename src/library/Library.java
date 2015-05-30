@@ -13,7 +13,7 @@ public class Library
 {	
 	SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
 	Date date = new Date();
-	
+		
 	public void registerUser(String path, String name, String rg, String type) throws IOException
 	{ 
 		BufferedWriter buffWrite = new BufferedWriter(new FileWriter(path, true));
@@ -57,11 +57,6 @@ public class Library
 	return list;
 	}
 	
-		//Ao chegar nesse ponto, temos um userList com todos os usuarios registrados
-		//Usar readUsers() para obter a lista de usuarios do arquivo, e usar essa lista para imprimir 
-		//		os nomes no "See All the Users" da interface
-		
-	
 	public ArrayList<Book> readBooks(String path) throws IOException //Le todos os livros e joga na "List<Book> bookList"
 	{ 			
 		ArrayList<Book> booksList = new ArrayList<Book>();
@@ -78,10 +73,6 @@ public class Library
 				booksList.add(b); //Adicionando book na lista
 				line = buffRead.readLine(); //Lendo proximo livro
 		}
-		//Ao chegar nesse ponto, temos um booksList com todos os livros registrados
-		//Usar readBooks() para obter a lista de usuarios do arquivo, e usar essa lista para imprimir 
-		//		os nomes no "See All the Users" da interface
-		
 	buffRead.close();
 	return booksList;
 	}

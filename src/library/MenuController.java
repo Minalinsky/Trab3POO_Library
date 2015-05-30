@@ -1,5 +1,10 @@
 package library;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Date;
@@ -114,47 +119,102 @@ public class MenuController implements Initializable
 	@FXML
     void onClickRegisterLoan(ActionEvent event) throws Exception
     {
-    	ArrayList<User> usersList = lb.readUsers("Users.csv");
-    	ArrayList<Loan> loansList = lb.readLoans("Loans.csv");
-    	
-    	Date aux = new Date(lb.date.getYear(), lb.date.getMonth(), lb.date.getDate());
-    	
-    	String rg = TextNameLoan.getText();
-    	List<User> filteredList = usersList.stream().filter(u->u.getRg().equals(rg))
-    			.collect(Collectors.toList());
-    	User filteredUser = filteredList.get(0);
-    	
-    	long numberLoans = loansList.stream().filter(l->l.getRg().equals(rg))
-    			.filter(l->l.getOk().equals("false")).collect(Collectors.counting());
-    	
-    	if(filteredUser.getBanned().equals("false"))
+    	if(TextTypeLoan.getText().equals("Loan") || TextTypeLoan.getText().equals("loan")) //Se o tipo for emprestimo
     	{
-    		if(filteredUser.getType().equals("teacher"))
-    		{
-    			if(numberLoans < 6)
-    			{
-    				aux.setDate(lb.date.getDate() + 60);
-    				lb.registerLoan("Loans.csv", TextNameLoan.getText(), TextTitleLoan.getText(), lb.formatter.format(aux));
-    			}
-    		}
-    		else if(filteredUser.getType().equals("student"))
-    		{
-    			if(numberLoans < 4)
-    			{
-    				aux.setDate(lb.date.getDate() + 15);
-    				lb.registerLoan("Loans.csv", TextNameLoan.getText(), TextTitleLoan.getText(), lb.formatter.format(aux));
-    			}
-    		}
-    		else if(filteredUser.getType().equals("comunity"))
-    		{
-    			if(numberLoans < 2)
-    			{
-    				aux.setDate(lb.date.getDate() + 15);
-    				lb.registerLoan("Loans.csv", TextNameLoan.getText(), TextTitleLoan.getText(), lb.formatter.format(aux));
-    			}
-    		}
+    		//Falta verificar se o usuario esta banido
+    		//Falta verificar se o livro existe na biblioteca
+    		//Falta tratar quando digitar coisas invalidas nos campos
+    		//Tratar um emprestimo por pessoa para cada titulo de livro
+	    	ArrayList<User> usersList = lb.readUsers("Users.csv");
+	    	ArrayList<Loan> loansList = lb.readLoans("Loans.csv");
+	    	
+	    	Date aux = new Date(lb.date.getYear(), lb.date.getMonth(), lb.date.getDate());
+	    	
+	    	String rg = TextNameLoan.getText();
+	    	List<User> filteredList = usersList.stream().filter(u->u.getRg().equals(rg))
+	    			.collect(Collectors.toList());
+	    	User filteredUser = filteredList.get(0);
+	    	
+	    	long numberLoans = loansList.stream().filter(l->l.getRg().equals(rg))
+	    			.filter(l->l.getOk().equals("false")).collect(Collectors.counting());
+	    	
+	    	if(filteredUser.getBanned().equals("false"))
+	    	{
+	    		if(filteredUser.getType().equals("teacher"))
+	    		{
+	    			if(numberLoans < 6)
+	    			{
+	    				aux.setDate(lb.date.getDate() + 60);
+	    				lb.registerLoan("Loans.csv", TextNameLoan.getText(), TextTitleLoan.getText(), lb.formatter.format(aux));
+	    			}
+	    		}
+	    		else if(filteredUser.getType().equals("student"))
+	    		{
+	    			if(numberLoans < 4)
+	    			{
+	    				aux.setDate(lb.date.getDate() + 15);
+	    				lb.registerLoan("Loans.csv", TextNameLoan.getText(), TextTitleLoan.getText(), lb.formatter.format(aux));
+	    			}
+	    		}
+	    		else if(filteredUser.getType().equals("comunity"))
+	    		{
+	    			if(numberLoans < 2)
+	    			{
+	    				aux.setDate(lb.date.getDate() + 15);
+	    				lb.registerLoan("Loans.csv", TextNameLoan.getText(), TextTitleLoan.getText(), lb.formatter.format(aux));
+	    			}
+	    		}
+	    	}
     	}
-    
+    	else if(TextTypeLoan.getText().equals("Devolution") || TextTypeLoan.getText().equals("devolution"))
+    	{
+    		ArrayList<Loan> loansList = lb.readLoans("Loans.csv"); //Lista de todos os emprestimos feitos
+    		
+    		String rg = TextNameLoan.getText();
+    		List<Loan> filteredLoansList = loansList.stream().filter(l->l.getRg().equals(rg)).filter(l->l.getTitle().equals(TextTitleLoan.getText()))
+    			.filter(l->l.getOk().equals("false")).collect(Collectors.toList()); //Filtra todos os emprestimos ainda nao devolvidos feitos pelo RG passado,
+    																				//com o livro de titulo passado
+    		if(filteredLoansList.isEmpty())
+    		{
+    			//Tratar
+    		}
+    		else
+    		{
+    			final Date today = new Date(lb.date.getYear(), lb.date.getMonth(), lb.date.getDate()); //Data atual
+    			Date returnDate = new Date();
+    			Loan loan = filteredLoansList.get(0);
+    			returnDate = lb.formatter.parse(loan.getReturnDate()); //Data maxima de devolucao
+    			
+    			if(returnDate.equals(today) || returnDate.after(today)) //Se a entrega nao tiver atrasada
+    			{
+    				BufferedReader br = new BufferedReader(new FileReader("Loans.csv"));
+    				BufferedWriter bw = new BufferedWriter(new FileWriter("tmp_Loans.csv"));
+    				String line;
+    				
+    				while((line = br.readLine()) != null)
+    				{
+    					if(!(line.contains(rg) && line.contains(TextTitleLoan.getText())))
+    					{
+    						bw.append(line + "\n");
+    					}
+    				}
+    				br.close();
+    				bw.close();
+    				File oldFile = new File("Loans.csv");
+    				File newFile = new File("tmp_Loans.csv");
+    				oldFile.delete();
+    				newFile.renameTo(oldFile);
+    			}
+    			else
+    			{
+    				//Calcular quantos dias de ban
+    				//Adicionar a ban
+    			}
+    			
+    			
+    		}
+    		
+    	}
     }
     
     @FXML
