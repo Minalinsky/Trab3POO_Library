@@ -2,12 +2,15 @@ package library;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class Library 
 {	
@@ -97,5 +100,26 @@ public class Library
 		
 	buffRead.close();
 	return list;
+	}
+	
+	public void removeLoan(String rg, String title) throws IOException
+	{
+			BufferedReader br = new BufferedReader(new FileReader("Loans.csv"));
+			BufferedWriter bw = new BufferedWriter(new FileWriter("tmp_Loans.csv"));
+			String line;
+			
+			while((line = br.readLine()) != null)
+			{
+				if(!(line.contains(rg) && line.contains(title)))
+				{
+					bw.append(line + "\n");
+				}
+			}
+			br.close();
+			bw.close();
+			File oldFile = new File("Loans.csv");
+			File newFile = new File("tmp_Loans.csv");
+			oldFile.delete();
+			newFile.renameTo(oldFile);
 	}
 }

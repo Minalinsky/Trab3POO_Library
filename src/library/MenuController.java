@@ -121,6 +121,7 @@ public class MenuController implements Initializable
     {
     	if(TextTypeLoan.getText().equals("Loan") || TextTypeLoan.getText().equals("loan")) //Se o tipo for emprestimo
     	{
+    		//Ao abrir MenuController, remover de ban.csv todos os usuarios que nao estao mais banidos (pela data atual)
     		//Falta verificar se o usuario esta banido
     		//Falta verificar se o livro existe na biblioteca
     		//Falta tratar quando digitar coisas invalidas nos campos
@@ -170,15 +171,14 @@ public class MenuController implements Initializable
     	{
     		ArrayList<Loan> loansList = lb.readLoans("Loans.csv"); //Lista de todos os emprestimos feitos
     		
-    		String rg = TextNameLoan.getText();
-    		List<Loan> filteredLoansList = loansList.stream().filter(l->l.getRg().equals(rg)).filter(l->l.getTitle().equals(TextTitleLoan.getText()))
-    			.filter(l->l.getOk().equals("false")).collect(Collectors.toList()); //Filtra todos os emprestimos ainda nao devolvidos feitos pelo RG passado,
-    																				//com o livro de titulo passado
+    		List<Loan> filteredLoansList = loansList.stream().filter(l->l.getRg().equals(TextNameLoan.getText())).filter(l->l.getTitle()
+    				.equals(TextTitleLoan.getText())).collect(Collectors.toList()); //Filtra todos os emprestimos ainda nao devolvidos feitos pelo RG passado,
+        																				//com o livro de titulo passado
     		if(filteredLoansList.isEmpty())
     		{
     			//Tratar
     		}
-    		else
+    		else 
     		{
     			final Date today = new Date(lb.date.getYear(), lb.date.getMonth(), lb.date.getDate()); //Data atual
     			Date returnDate = new Date();
@@ -187,33 +187,30 @@ public class MenuController implements Initializable
     			
     			if(returnDate.equals(today) || returnDate.after(today)) //Se a entrega nao tiver atrasada
     			{
-    				BufferedReader br = new BufferedReader(new FileReader("Loans.csv"));
-    				BufferedWriter bw = new BufferedWriter(new FileWriter("tmp_Loans.csv"));
-    				String line;
-    				
-    				while((line = br.readLine()) != null)
-    				{
-    					if(!(line.contains(rg) && line.contains(TextTitleLoan.getText())))
-    					{
-    						bw.append(line + "\n");
-    					}
-    				}
-    				br.close();
-    				bw.close();
-    				File oldFile = new File("Loans.csv");
-    				File newFile = new File("tmp_Loans.csv");
-    				oldFile.delete();
-    				newFile.renameTo(oldFile);
+    				lb.removeLoan(TextNameLoan.getText(), TextTitleLoan.getText());
     			}
     			else
     			{
-    				//Calcular quantos dias de ban
-    				//Adicionar a ban
+    				//calculando quantos dias de ban em counter
+    				int counter = 0;
+    				int day = today.getDate();
+    				
+    				while(!today.equals(returnDate))
+    				{
+    					day--;
+    					today.setDate(day);
+    					counter++;
+    				}
+    				//Calculando até que dia está banido
+    				Date aux = new Date(lb.date.getYear(), lb.date.getMonth(), lb.date.getDate());
+    				aux.setDate(aux.getDate() + counter);
+    				//Escrevendo ban em Ban.csv
+    				BufferedWriter bw = new BufferedWriter(new FileWriter("Bans.csv"));
+    				bw.append(TextNameLoan.getText() + "," + lb.formatter.format(aux) + "\n"); //Escreve o RG e a data até quando esta banido em Ban.csv
+    				bw.close();
+    				lb.removeLoan(TextNameLoan.getText(), TextTitleLoan.getText());
     			}
-    			
-    			
     		}
-    		
     	}
     }
     
