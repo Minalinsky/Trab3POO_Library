@@ -126,13 +126,13 @@ public class MenuController implements Initializable
     		}
     		else
     		{
-    			//System.out.println("Tipo de livro incompativel!!");
+    			System.out.println("Tipo de livro incompativel!!"); //TESTE
     			//Tratar - Imprimir "Tipo de livro incompativel!!"
     		}
 		}
     	else
     	{
-    		//System.out.println("Este livro ja está cadastrado!!");
+    		System.out.println("Este livro ja está cadastrado!!"); //TESTE
     		// Tratar - Imprimir mensagem "Este livro ja está cadastrado!!"
     	}
     }
@@ -223,6 +223,11 @@ public class MenuController implements Initializable
     				//Tratar - Mostrar "usuario foi banido por 'COUNTER' dias!"
     			}
     		}
+    	}
+    	else
+    	{
+    		// Tratar - Imprimir "Tipo de acao incompatível!"
+    		System.out.println("Tipo de acao incompatível!"); // TESTE
     	}
     }
     

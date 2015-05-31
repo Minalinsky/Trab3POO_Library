@@ -144,8 +144,8 @@ public class Library
     			}
     			else
     			{
-    				// Tratar - Imprimir "Numero Maximo de Emprestimos permitidos!!"
-    				System.out.println("Numero Maximo de Emprestimos permitidos!!");//TESTE
+    				// Tratar - Imprimir "Numero Maximo de Emprestimos permitidos(6)!!"
+    				System.out.println("Numero Maximo de Emprestimos permitidos(6)!!");//TESTE
     			}
     		}
     		else if(filteredUser.getType().equals("student"))
@@ -157,8 +157,8 @@ public class Library
     			}
     			else
     			{
-    				// Tratar - Imprimir "Numero Maximo de Emprestimos permitidos!!"
-    				System.out.println("Numero Maximo de Emprestimos permitidos2!!");//TESTE
+    				// Tratar - Imprimir "Numero Maximo de Emprestimos permitidos(4)!!"
+    				System.out.println("Numero Maximo de Emprestimos permitidos(4)!!");//TESTE
     			}
     		}
     		else if(filteredUser.getType().equals("comunity"))
@@ -170,8 +170,8 @@ public class Library
     			}
     			else
     			{
-    				// Tratar - Imprimir "Numero Maximo de Emprestimos permitidos!!"
-    				System.out.println("Numero Maximo de Emprestimos permitidos3!!");//TESTE
+    				// Tratar - Imprimir "Numero Maximo de Emprestimos permitidos(2)!!"
+    				System.out.println("Numero Maximo de Emprestimos permitidos(2)!!");//TESTE
     			}
     		}
     	}
