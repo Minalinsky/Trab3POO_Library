@@ -142,6 +142,11 @@ public class Library
     				aux.setDate(this.date.getDate() + 60);
     				this.writeLoan(rg, title, this.formatter.format(aux));
     			}
+    			else
+    			{
+    				// Tratar - Imprimir "Numero Maximo de Emprestimos permitidos!!"
+    				System.out.println("Numero Maximo de Emprestimos permitidos!!");//TESTE
+    			}
     		}
     		else if(filteredUser.getType().equals("student"))
     		{
@@ -150,6 +155,11 @@ public class Library
     				aux.setDate(this.date.getDate() + 15);
     				this.writeLoan(rg, title, this.formatter.format(aux));
     			}
+    			else
+    			{
+    				// Tratar - Imprimir "Numero Maximo de Emprestimos permitidos!!"
+    				System.out.println("Numero Maximo de Emprestimos permitidos2!!");//TESTE
+    			}
     		}
     		else if(filteredUser.getType().equals("comunity"))
     		{
@@ -157,6 +167,11 @@ public class Library
     			{
     				aux.setDate(this.date.getDate() + 15);
     				this.writeLoan(rg, title, this.formatter.format(aux));
+    			}
+    			else
+    			{
+    				// Tratar - Imprimir "Numero Maximo de Emprestimos permitidos!!"
+    				System.out.println("Numero Maximo de Emprestimos permitidos3!!");//TESTE
     			}
     		}
     	}
@@ -211,5 +226,31 @@ public class Library
 		File newFile = new File("tmp_Bans.csv");
 		oldFile.delete();
 		newFile.renameTo(oldFile);
+	}
+	
+	public boolean bookIsRegistered(String title) throws IOException
+	{
+		ArrayList<Book> tmp_array = this.readBooks();
+		if(tmp_array.stream().map(Book::getTitle).anyMatch(b->b.equals(title)))
+			return true;
+		return false;
+	}
+	
+	public User searchUserByRg(String rg) throws IOException
+	{
+		List<User> usersList = readUsers();
+		usersList = usersList.stream().filter(u->u.getRg().equals(rg)).collect(Collectors.toList());
+		if(usersList.isEmpty())
+			return null;
+		return usersList.get(0);
+	}
+	
+	public Book searchBookByTitle(String title) throws IOException
+	{
+		List<Book> booksList = readBooks();
+		booksList = booksList.stream().filter(b->b.getTitle().equals(title)).collect(Collectors.toList());
+		if(booksList.isEmpty())
+			return null;
+		return booksList.get(0);
 	}
 }

@@ -114,32 +114,80 @@ public class MenuController implements Initializable
     @FXML
     void onClickRegisterBook(ActionEvent event) throws Exception
     {	
-    	//Tratar - nao aceitar outros tipos de livro
-    	lb.registerBook(TextTitleBook.getText(), TextAuthorBook.getText(), TextTypeBook.getText());
+    	final String title = TextTitleBook.getText();
+    	final String author = TextAuthorBook.getText();
+    	final String type = TextTypeBook.getText();
+    	
+    	if(!lb.bookIsRegistered(title)) //Verificando se o livro ja esta cadastrado na biblioteca
+		{
+    		if(type.equals("Text") || type.equals("General") || type.equals("text") || type.equals("general")) //Comparando tipo do livro (texto ou geral)
+    		{
+    			lb.registerBook(title, author, type);
+    		}
+    		else
+    		{
+    			//System.out.println("Tipo de livro incompativel!!");
+    			//Tratar - Imprimir "Tipo de livro incompativel!!"
+    		}
+		}
+    	else
+    	{
+    		//System.out.println("Este livro ja está cadastrado!!");
+    		// Tratar - Imprimir mensagem "Este livro ja está cadastrado!!"
+    	}
     }
 
     @SuppressWarnings("deprecation")
 	@FXML
     void onClickRegisterLoan(ActionEvent event) throws Exception
     {
-    	if(TextTypeLoan.getText().equals("Loan") || TextTypeLoan.getText().equals("loan")) //Se o tipo for emprestimo
+    	final String rg = TextNameLoan.getText();
+    	final String title = TextTitleLoan.getText();
+    	final String type = TextTypeLoan.getText();
+    	User auxUser;
+    	Book auxBook;
+    	
+    	if(type.equals("Loan") || type.equals("loan")) //Se o tipo for emprestimo
     	{
-    		// Tratar - verificar se o livro existe na biblioteca
     		// Tratar - tratar quando digitar coisas invalidas nos campos
     		// Tratar um emprestimo por pessoa para cada titulo de livro
-    		// Tratar - imprimir "Numero Maximo de Emprestimos permitidos!!"
-	    	lb.registerLoan(TextNameLoan.getText(), TextTitleLoan.getText());
+    		
+    		if(lb.bookIsRegistered(title)) //Verifica se o livro esta cadastrado no sistema
+    		{
+    			auxUser = lb.searchUserByRg(rg); //retorna o usuario com o rg passado
+    			auxBook = lb.searchBookByTitle(title);
+    			if(auxUser == null) //Se nenhum usuario for retornado
+    			{
+    				//Tratar - Imprimir "Usuario nao consta no sistema"
+    				System.out.println("Usuario nao consta no sistema");//TESTE
+    			}
+    			else
+    			{
+    				if((auxUser.getType().equals("Comunity") || auxUser.getType().equals("comunity")) && //Se o usuario for comunity
+    						(auxBook.getType().equals("text") || auxBook.getType().equals("Text"))) //e o livro a ser retirado for Texto
+    				{
+    					//Tratar -Imprimir "Nao pode retirar esse tipo de livro!"
+    					System.out.println("Nao pode retirar esse tipo de livro!");//TESTE
+    				}
+    				else lb.registerLoan(rg, title);
+    			}
+    		}
+    		else
+    		{
+    			// Tratar - Imprimir "A biblioteca nao possui o livro solicitado!!"
+    			System.out.println("A biblioteca nao possui o livro solicitado!!");//TESTE
+    		}
     	}
-    	else if(TextTypeLoan.getText().equals("Devolution") || TextTypeLoan.getText().equals("devolution"))
+    	else if(type.equals("Devolution") || type.equals("devolution"))
     	{
     		ArrayList<Loan> loansList = lb.readLoans(); //Lista de todos os emprestimos feitos
     		
-    		List<Loan> filteredLoansList = loansList.stream().filter(l->l.getRg().equals(TextNameLoan.getText())).filter(l->l.getTitle()
-    				.equals(TextTitleLoan.getText())).collect(Collectors.toList()); //Filtra todos os emprestimos ainda nao devolvidos feitos pelo RG passado,
+    		List<Loan> filteredLoansList = loansList.stream().filter(l->l.getRg().equals(rg)).filter(l->l.getTitle()
+    				.equals(title)).collect(Collectors.toList()); //Filtra todos os emprestimos ainda nao devolvidos feitos pelo RG passado,
         																				//com o livro de titulo passado
     		if(filteredLoansList.isEmpty())
     		{
-    			//Tratar quando nao ha livros para serem devolvidos por "RG"
+    			//Tratar - Imprimir "Nao ha nenhum livro a ser devolvido por (fulano)!!"
     		}
     		else 
     		{
@@ -150,7 +198,7 @@ public class MenuController implements Initializable
     			
     			if(returnDate.equals(today) || returnDate.after(today)) //Se a entrega nao tiver atrasada
     			{
-    				lb.removeLoan(TextNameLoan.getText(), TextTitleLoan.getText());
+    				lb.removeLoan(rg, title);
     			}
     			else
     			{
@@ -169,10 +217,10 @@ public class MenuController implements Initializable
     				aux.setDate(aux.getDate() + counter);
     				//Escrevendo ban em Ban.csv
     				BufferedWriter bw = new BufferedWriter(new FileWriter("Bans.csv", true));
-    				bw.append(TextNameLoan.getText() + "," + lb.formatter.format(aux) + "\n"); //Escreve o RG e a data até quando esta banido em Ban.csv
+    				bw.append(rg + "," + lb.formatter.format(aux) + "\n"); //Escreve o RG e a data até quando esta banido em Ban.csv
     				bw.close();
-    				lb.removeLoan(TextNameLoan.getText(), TextTitleLoan.getText());
-    				//Tratar - Mostrar "usuario foi banido por COUNTER dias!"
+    				lb.removeLoan(rg, title);
+    				//Tratar - Mostrar "usuario foi banido por 'COUNTER' dias!"
     			}
     		}
     	}
