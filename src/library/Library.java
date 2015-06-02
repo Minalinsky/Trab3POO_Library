@@ -119,7 +119,8 @@ public class Library
 	return list;
 	}
 	
-	public void registerLoan(String rg, String title) throws IOException
+	@SuppressWarnings("deprecation")
+	public int registerLoan(String rg, String title) throws IOException
 	{
 		ArrayList<User> usersList = this.readUsers();
     	ArrayList<Loan> loansList = this.readLoans();
@@ -135,50 +136,41 @@ public class Library
     	
     	if(!bansList.stream().map(b->b.getRg()).anyMatch(b-> b.equals(rg)))
     	{ 
-    		if(filteredUser.getType().equals("teacher"))
+    		if(filteredUser.getType().equals("teacher") || filteredUser.getType().equals("Teacher"))
     		{
     			if(numberLoans < 6)
     			{
     				aux.setDate(this.date.getDate() + 60);
     				this.writeLoan(rg, title, this.formatter.format(aux));
+    				return 0;
     			}
-    			else
-    			{
-    				// Tratar - Imprimir "Numero Maximo de Emprestimos permitidos(6)!!"
-    				System.out.println("Numero Maximo de Emprestimos permitidos(6)!!");//TESTE
-    			}
+    			else return 1;
     		}
-    		else if(filteredUser.getType().equals("student"))
+    		else if(filteredUser.getType().equals("student") || filteredUser.getType().equals("Student"))
     		{
     			if(numberLoans < 4)
     			{
     				aux.setDate(this.date.getDate() + 15);
     				this.writeLoan(rg, title, this.formatter.format(aux));
+    				return 0;
     			}
-    			else
-    			{
-    				// Tratar - Imprimir "Numero Maximo de Emprestimos permitidos(4)!!"
-    				System.out.println("Numero Maximo de Emprestimos permitidos(4)!!");//TESTE
-    			}
+    			else return 1;
+    		
     		}
-    		else if(filteredUser.getType().equals("comunity"))
+    		else if(filteredUser.getType().equals("comunity") || filteredUser.getType().equals("Comunity"))
     		{
     			if(numberLoans < 2)
     			{
     				aux.setDate(this.date.getDate() + 15);
     				this.writeLoan(rg, title, this.formatter.format(aux));
+    				return 0;
     			}
-    			else
-    			{
-    				// Tratar - Imprimir "Numero Maximo de Emprestimos permitidos(2)!!"
-    				System.out.println("Numero Maximo de Emprestimos permitidos(2)!!");//TESTE
-    			}
+    			else return 1;
     		}
     	}
-    	else
-    	{
-    		//Tratar quando o usuario está banido
-    	}
+    	else return 2;
+    	
+    	return 3;
 	}
 	
 	public void removeLoan(String rg, String title) throws IOException
@@ -208,8 +200,6 @@ public class Library
 		BufferedWriter bw = new BufferedWriter(new FileWriter("tmp_Bans.csv"));
 		String line;
 		String[] splitLine;
-		//ArrayList<Ban> bansList = this.readBans();
-		//Date today = this.date;
 		
 		while((line = br.readLine()) != null)
 		{
@@ -235,7 +225,7 @@ public class Library
 			return true;
 		return false;
 	}
-	
+		
 	public User searchUserByRg(String rg) throws IOException
 	{
 		List<User> usersList = readUsers();
@@ -253,4 +243,17 @@ public class Library
 			return null;
 		return booksList.get(0);
 	}
+	
+	public boolean isBookLoanned(String title) throws IOException
+	{
+		List<Loan> booksList = this.readLoans();
+		return(booksList.stream().map(b->b.getTitle()).anyMatch(t->t.equals(title)));
+	}
+	
+	public boolean isUserRegistered(String rg) throws IOException
+	{
+		List<User> usersList = this.readUsers();
+		return(usersList.stream().map(u->u.getRg()).anyMatch(u->u.equals(rg)));
+	}
+	
 }

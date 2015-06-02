@@ -104,7 +104,7 @@
             <Font size="13.0" />
          </font>
       </Button>
-      <Button fx:id="BtPrintLoans" layoutX="584.0" layoutY="403.0" mnemonicParsing="false" text="See all the Loans">
+      <Button fx:id="BtPrintLoans" layoutX="584.0" layoutY="403.0" mnemonicParsing="false" onAction="#onClickShowLoans" text="See all the Loans">
          <font>
             <Font size="13.0" />
          </font></Button>
@@ -112,9 +112,9 @@
       <TextField fx:id="TextTypeUser" layoutX="34.0" layoutY="236.0" />
       <TextField fx:id="TextTypeBook" layoutX="283.0" layoutY="236.0" />
       <TextField fx:id="TextTypeLoan" layoutX="542.0" layoutY="236.0" />
-      <Label fx:id="ErrorUser" layoutX="40.0" layoutY="337.0" prefHeight="17.0" prefWidth="168.0" text="Label" visible="false" />
-      <Label fx:id="ErrorBooks" layoutX="279.0" layoutY="343.0" prefHeight="17.0" prefWidth="168.0" text="Label" visible="false" />
-      <Label fx:id="ErrorLoan" layoutX="616.0" layoutY="343.0" prefHeight="17.0" prefWidth="122.0" text="Label" visible="false" />
+      <Label fx:id="ErrorUser" layoutX="40.0" layoutY="337.0" prefHeight="17.0" prefWidth="195.0" text="Label" visible="false" />
+      <Label fx:id="ErrorBooks" layoutX="279.0" layoutY="343.0" prefHeight="17.0" prefWidth="205.0" text="Label" visible="false" />
+      <Label fx:id="ErrorLoan" layoutX="520.0" layoutY="343.0" prefHeight="17.0" prefWidth="236.0" text="Label" visible="false" />
       <Text fx:id="LblDate" layoutX="521.0" layoutY="518.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="228.322265625">
          <font>
             <Font size="35.0" />
