@@ -7,6 +7,15 @@ Trabalho 3 da disciplina Programação Orientada a Objetos: Implementação de um si
 
 Link para a descrição do trabalho: https://waa.ai/veNE
 
+************************************************************************************************************
+									IMPORTANTE!!
+									
+		- O Trab3POO_Library.jar deve estar no mesmo diretório de todos os outros arquivos *.csv para
+		funcionar adequadamente, mesmo que estes estejam em branco.
+		- Arquivos *.csv: Bans.csv, Books.csv, Loans.csv, Users.csv
+************************************************************************************************************
+
+
 Intruções:      -Ao rodar/executar o programa, uma tela inicial será aberta solicitando a data atual de operação da biblioteca.
                 -A data deve ser fornecida pelo usuário no seguinte formato: dd/mm/yyyy. Exemplo: a data 01/02/2015 corresponde ao
                 dia 01 de Fevereiro de 2015.
