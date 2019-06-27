@@ -7,13 +7,13 @@ Trabalho 3 da disciplina Programação Orientada a Objetos: Implementação de u
 
 Link para a descrição do trabalho: https://waa.ai/veNE
 
-************************************************************************************************************
-									IMPORTANTE!!
+***********************************************************************************************************************
+							IMPORTANTE!!
 									
 		- O Trab3POO_Library.jar deve estar no mesmo diretório de todos os outros arquivos *.csv para
 		funcionar adequadamente, mesmo que estes estejam em branco.
 		- Arquivos *.csv: Bans.csv, Books.csv, Loans.csv, Users.csv
-************************************************************************************************************
+***********************************************************************************************************************
 
 
 ### Intruções:  
