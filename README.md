@@ -22,13 +22,12 @@ Link para a descrição do trabalho: https://waa.ai/veNE
 - Ao clicar no botão "Ok", uma segunda tela será aberta. Nessa tela encontramos todas as funções necessárias para o funcionamento da biblioteca imprementada (cadastro de usuários, cadastros de livros, listar emprestimos, etc.).
 				
 - Para registrar uma pessoa no sistema da biblioteca, o usuário deve digitar as informações corretas nos campos correspondentes à coluna denominada "Register Users" e depois pressionar o botão "Register". Para isso ele deve preencher:
-                                1- em "Name" o nome da pessoa a ser cadastrada.
-                                2- em "RG" o número de registro da pessoa.
-                                3- em "Type" o tipo do usuario a ser cadastrado. Esse campo aceita apenas 6 valores como entrada:
-                                "student"/"Student","community"/"Community","teacher"/"Teacher"
+				1- em "Name" o nome da pessoa a ser cadastrada.
+				2- em "RG" o número de registro da pessoa.
+				3- em "Type" o tipo do usuario a ser cadastrado. Esse campo aceita apenas 6 valores como entrada: "student"/"Student","community"/"Community","teacher"/"Teacher"
                                 
 - Para registrar um Livro no sistema da biblioteca, o usuário deve digitar as informações corretas nos campos correspondentes à coluna denominada "Register Books" e depois pressionar o botão "Register". Para isso ele deve preencher:
-                                1- em "Title" o título do livro a ser adicionado
+				1- em "Title" o título do livro a ser adicionado
 				2- em "Author" o nome do autor
 				3- em "Type" o tipo do livro, podendo ser "Text"/"text" ou "General"/"general". Titulos repetidos não são aceitos
 								
